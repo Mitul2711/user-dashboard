@@ -1,0 +1,78 @@
+<app-header></app-header>
+
+<div class="container my-4">
+
+    <div class="card-group">
+        <div class="dashboard-card">
+            <i class="bi bi-people fs-2 text-primary"></i>
+            <div>
+                <small class="text-muted">Total Users</small>
+                <h5 class="mb-0 fw-bold text-dark">{{userData.length}}</h5>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <i class="bi bi-search fs-2 text-success"></i>
+            <div>
+                <small class="text-muted">Filtered Results</small>
+                <h5 class="mb-0 fw-bold text-dark">{{dataSource.data.length}}</h5>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <i class="bi bi-shield-check fs-2 text-purple"></i>
+            <div>
+                <small class="text-muted">Active Session</small>
+                <h5 class="mb-0 fw-bold text-dark">Protected</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 custom-search">
+        <form class="example-form">
+            <mat-form-field class="example-full-width custom-form-field">
+                <mat-label>Search User</mat-label>
+                <input matInput placeholder="Search User Here..." (keyup)="onSearch($event)">
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="mt-5">
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef> UserName </th>
+                    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="company">
+                    <th mat-header-cell *matHeaderCellDef> Company </th>
+                    <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="city">
+                    <th mat-header-cell *matHeaderCellDef> City </th>
+                    <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+</div>
