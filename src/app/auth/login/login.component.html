@@ -4,23 +4,24 @@
             <h2>Welcome Back</h2>
             <p class="subtitle">Enter your username to access the dashboard</p>
 
-            <form [formGroup]="loginForm"></form>
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" formControlName="userName" placeholder="Enter your username" />
-            </div>
-            
-            <div class="password-wrapper">
-                <label for="password">Password</label>
-                <div class="password-input">
-                    <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password"
-                        placeholder="Enter your password" />
-                    <i class="bi" [ngClass]="showPassword ? 'bi-eye-fill' : 'bi bi-eye-slash-fill'"
-                        (click)="togglePasswordVisibility()"></i>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" formControlName="userName" placeholder="Enter your username" />
                 </div>
-            </div>
 
-            <button type="button">Sign In</button>
+                <div class="password-wrapper">
+                    <label for="password">Password</label>
+                    <div class="password-input">
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password"
+                            placeholder="Enter your password" />
+                        <i class="bi" [ngClass]="showPassword ? 'bi-eye-fill' : 'bi bi-eye-slash-fill'"
+                            (click)="togglePasswordVisibility()"></i>
+                    </div>
+                </div>
+
+                <button type="submit">Sign In</button>
+            </form>
 
             <p class="demo-text">Don't have an account? <a routerLink="/signup">Sign Up</a></p>
         </div>

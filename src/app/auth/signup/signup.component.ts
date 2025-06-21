@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,7 @@ export class SignupComponent {
 
  signupForm!: FormGroup;
 
- constructor(private fb: FormBuilder) {
+ constructor(private fb: FormBuilder, private authService: AuthService) {
   this.signupForm = this.fb.group({
     userName: [''],
     password: [''],
@@ -35,7 +36,13 @@ export class SignupComponent {
     if(this.signupForm.valid) {
       const formData = this.signupForm.value;
       if(formData.password === formData.confirmPass) {
-        console.log('Form Submitted', formData);
+        let data = {
+          userName: formData.userName,
+          password: formData.password
+        }
+        this.authService.postUser(data).subscribe(() => {
+          this.signupForm.reset();
+        });
       } else {
         console.error('Passwords do not match');
       }
