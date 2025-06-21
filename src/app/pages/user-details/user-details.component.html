@@ -1,0 +1,79 @@
+<div class="p-4">
+
+    <div>
+        <h5>User Details</h5>
+        <small>Complete information for {{data.name}}</small>
+    </div>
+
+    <div>
+        <mat-tab-group>
+            <mat-tab label="Personal">
+
+                <div class="form-container">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" [value]="data.name" disabled />
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" [value]="data.username" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" [value]="data.email" disabled />
+                    </div>
+                </div>
+
+
+            </mat-tab>
+            <mat-tab label="Company">
+
+                <div class="form-container-contact">
+                    <div class="form-group">
+                        <label for="phone">Company Name</label>
+                        <input type="text" id="phone" [value]="data.company.name" disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">catchPhrase</label>
+                        <input type="text" id="website" [value]="data.company.catchPhrase" disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Business</label>
+                        <textarea id="address" rows="3" disabled>{{data.company.bs}}
+                        </textarea>
+                    </div>
+                </div>
+
+
+            </mat-tab>
+            <mat-tab label="Contact">
+
+                <div class="form-container-contact">
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" [value]="data.phone" disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" [value]="data.website" disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" rows="3"
+                            disabled>{{data.address.street}},  {{data.address.suite}},
+{{data.address.city}}, {{data.address.zipcode}}</textarea>
+                    </div>
+                </div>
+
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+
+</div>
