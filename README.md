@@ -3,7 +3,7 @@
 ## 📋 Overview
 
 This project is a **simple Angular application** built to demonstrate core Angular concepts and latest features, including:
-- Authentication using Signals (Angular 17+)
+- Authentication using Signals (Angular 19)
 - Route Guards
 - Lazy-loaded modules
 - Standalone components
@@ -52,5 +52,5 @@ This project is a **simple Angular application** built to demonstrate core Angul
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-repo/angular-coding-test.git
-   cd angular-coding-test
+   git clone https://github.com//Mitul2711/user-dashboard.git
+   cd user-dashboard
