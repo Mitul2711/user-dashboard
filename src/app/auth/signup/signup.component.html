@@ -1,40 +1,46 @@
 <div class="page-wrapper">
-    <div class="login-container">
-        <div class="login-box">
-            <h2>Create Your Account</h2>
-            <p class="subtitle">Join us to access your personalized dashboard</p>
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Create Your Account</h2>
+      <p class="subtitle">Join us to access your personalized dashboard</p>
 
-            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-                <div>
-                    <label for="username">Username</label>
-                    <input type="text" id="username" formControlName="userName" placeholder="Enter your username" />
-                </div>
-
-                <div class="password-wrapper">
-                    <label for="password">Password</label>
-                    <div class="password-input">
-                        <input [type]="showPassword ? 'text' : 'password'" id="password"
-                           formControlName="password" placeholder="Enter your password" />
-                        <i class="bi" [ngClass]="showPassword ? 'bi-eye-fill' : 'bi bi-eye-slash-fill'"
-                            (click)="togglePasswordVisibility()"></i>
-                    </div>
-                </div>
-
-
-                <div class="password-wrapper">
-                    <label for="confirmpassword">Confirm Password</label>
-                    <div class="password-input">
-                        <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmpassword"
-                           formControlName="confirmPass" placeholder="Enter your password" />
-                        <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-fill' : 'bi bi-eye-slash-fill'"
-                            (click)="toggleConfirmPasswordVisibility()"></i>
-                    </div>
-                </div>
-
-                <button type="submit">Sign In</button>
-            </form>
-
-            <p class="demo-text">Already have an account? <a routerLink="/login">Sign In</a></p>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" formControlName="userName" placeholder="Enter your username" />
+          <small class="error" *ngIf="isInvalid('userName')">Please fill out this field.</small>
         </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-input">
+            <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="Enter your password" />
+            <i class="bi eye-icon" [ngClass]="showPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill'" (click)="togglePasswordVisibility()"></i>
+          </div>
+          <small class="error" *ngIf="isInvalid('password')">
+            <ng-container *ngIf="signupForm.get('password')?.errors?.['required']">
+              Please fill out this field.
+            </ng-container>
+            <ng-container *ngIf="signupForm.get('password')?.errors?.['pattern']">
+              Invalid format
+              <i class="bi bi-info-circle-fill info-icon" title="Password must be at least 8 characters long, and include uppercase, lowercase, number, and special character."></i>
+            </ng-container>
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmpassword">Confirm Password</label>
+          <div class="password-input">
+            <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmpassword" formControlName="confirmPass" placeholder="Confirm your password" />
+            <i class="bi eye-icon" [ngClass]="showConfirmPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill'" (click)="toggleConfirmPasswordVisibility()"></i>
+          </div>
+          <small class="error" *ngIf="isInvalid('confirmPass')">Please fill out this field.</small>
+        </div>
+
+        <button type="submit">Sign Up</button>
+      </form>
+
+      <p class="demo-text">Already have an account? <a routerLink="/login">Sign In</a></p>
     </div>
+  </div>
 </div>

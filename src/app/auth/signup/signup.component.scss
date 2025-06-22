@@ -6,7 +6,6 @@
   background-color: #eef3ff;
 }
 
-
 .login-container {
   width: 100%;
   max-width: 400px;
@@ -31,11 +30,15 @@
   margin-bottom: 1.5rem;
 }
 
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
 label {
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  text-align: left;
 }
 
 input {
@@ -44,7 +47,30 @@ input {
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1rem;
-  margin-bottom: 1.5rem;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  padding-right: 2.5rem;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.info-icon {
+  padding-left: 7px;
+  font-size: 1rem;
+  color: #999;
 }
 
 button {
@@ -69,28 +95,8 @@ button:hover {
   font-size: 0.9rem;
 }
 
-.password-wrapper {
-  margin-bottom: 1.5rem;
-}
-
-.password-input {
-  position: relative;
-}
-
-.password-input input {
-  width: 100%;
-  padding: 0.75rem 2.5rem 0.75rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.password-input i {
-  position: absolute;
-  top: 34%;
-  right: 1rem;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #666;
-  font-size: 1.2rem;
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }

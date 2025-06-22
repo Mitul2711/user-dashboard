@@ -8,6 +8,10 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
+   isLoggedIn(): boolean {
+    return !!localStorage.getItem('user');
+  }
+
   postUser(data: any) {
     return this.httpClient.post('http://localhost:3000/auth', data);
   }

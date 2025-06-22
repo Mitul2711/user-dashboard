@@ -1,33 +1,33 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { CommonService } from '../../services/common.service';
 
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule ,RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
- showPassword = false;
+  showPassword = false;
+  formSubmitted = false;
+  loginForm!: FormGroup;
+  userDetails: any[] = [];
 
- loginForm!: FormGroup;
- userDetails: any[] = [];
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private commonService: CommonService) {
+    this.loginForm = this.fb.group({
+      userName: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    })
+  }
 
- constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-  this.loginForm = this.fb.group({
-    userName: [''],
-    password: [''],
-    confirmPass: ['']
-  })
- }
-
- ngOnInit(): void {
-   this.getUserDetails();
- }
+  ngOnInit(): void {
+    this.getUserDetails();
+  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -40,24 +40,34 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.loginForm.valid) {
+    this.formSubmitted = true;
+    if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      const matchedUser = this.userDetails.find((user: any) => 
-      user.email === formData.email && user.password === formData.password
-    );
+      const matchedUser = this.userDetails.find((user: any) =>
+        user.userName === formData.userName && user.password === formData.password
+      );
 
-    if (matchedUser) {
-      console.log('Login successful:', matchedUser);
-      // You can store user info in localStorage or navigate
-      // localStorage.setItem('user', JSON.stringify(matchedUser));
-      this.router.navigate(['/']);
-      this.loginForm.reset();
-    } else {
-      console.error('Invalid email or password');
-    }
+      if (matchedUser) {
+        this.router.navigate(['/']);
+        localStorage.setItem('user', matchedUser.userName);
+        this.loginForm.reset();
+        this.commonService.showSuccess('Login successful');
+        const now = new Date().getTime();
+        const expiryTime = now + 15 * 60 * 1000;
+        localStorage.setItem('expiry', expiryTime.toString());
+      } else {
+        console.error('Invalid email or password');
+        this.commonService.showError('Wrong Username or Password!');
+      }
 
     } else {
       console.error('Form is invalid');
     }
   }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.loginForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched || this.formSubmitted));
+  }
+
 }
