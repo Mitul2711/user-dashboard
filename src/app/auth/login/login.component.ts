@@ -5,9 +5,9 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CommonService } from '../../services/common.service';
 
-
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -18,11 +18,16 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   userDetails: any[] = [];
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private commonService: CommonService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private commonService: CommonService
+  ) {
     this.loginForm = this.fb.group({
       userName: ['', [Validators.required]],
       password: ['', [Validators.required]]
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -36,30 +41,25 @@ export class LoginComponent implements OnInit {
   getUserDetails() {
     this.authService.getUsers().subscribe((res: any) => {
       this.userDetails = res;
-    })
+    });
   }
 
   onSubmit() {
     this.formSubmitted = true;
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      const matchedUser = this.userDetails.find((user: any) =>
-        user.userName === formData.userName && user.password === formData.password
+      const matchedUser = this.userDetails.find(
+        (user: any) => user.userName === formData.userName && user.password === formData.password
       );
 
       if (matchedUser) {
+        this.authService.login(matchedUser.userName);
         this.router.navigate(['/']);
-        localStorage.setItem('user', matchedUser.userName);
-        this.loginForm.reset();
         this.commonService.showSuccess('Login successful');
-        const now = new Date().getTime();
-        const expiryTime = now + 15 * 60 * 1000;
-        localStorage.setItem('expiry', expiryTime.toString());
+        this.loginForm.reset();
       } else {
-        console.error('Invalid email or password');
         this.commonService.showError('Wrong Username or Password!');
       }
-
     } else {
       console.error('Form is invalid');
     }
@@ -69,5 +69,4 @@ export class LoginComponent implements OnInit {
     const control = this.loginForm.get(controlName);
     return !!(control && control.invalid && (control.dirty || control.touched || this.formSubmitted));
   }
-
 }

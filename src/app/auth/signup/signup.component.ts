@@ -47,9 +47,9 @@ export class SignupComponent {
         }
         this.authService.postUser(data).subscribe({
           next: (res) => {
-            this.signupForm.reset();
             this.commonService.showSuccess('User created successfully');
             this.router.navigate(['/login']);
+            this.signupForm.reset();
           },
           error: (err) => {
             console.error('Error creating user:', err);
