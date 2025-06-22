@@ -1,59 +1,56 @@
-# UserDashboard
+# Angular Developer Coding Test
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+## 📋 Overview
 
-## Development server
+This project is a **simple Angular application** built to demonstrate core Angular concepts and latest features, including:
+- Authentication using Signals (Angular 17+)
+- Route Guards
+- Lazy-loaded modules
+- Standalone components
+- Custom directives
+- Deferred loading
+- Search & filtering
+- Pagination using Angular Material
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🚀 Features Implemented
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### ✅ Authentication
+- **Login** with mock credential validation using `json-server`
+- **Logout** functionality
+- **Authentication state** managed via Angular **Signals**
+- **Login state persisted** in localStorage
 
-## Code scaffolding
+### ✅ Dashboard
+- **Fetches users** from: `https://jsonplaceholder.typicode.com/users`
+- **Displays users** in a paginated table (5 per page)
+- **Search functionality** filters across all user properties
+- **Clicking a row** shows user details in a form
+- **Deferred loading** applied to user detail section
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### ✅ Routing & Guards
+- **Dashboard module** is **lazy-loaded**
+- **AuthGuard** protects routes from unauthenticated access
 
-```bash
-ng generate component component-name
-```
+### ✅ Angular Features
+- **Standalone Components** (LoginComponent, HeaderComponent)
+- **Signals** for reactive state management
+- **Custom Directive**: `HighlightDirective` changes row background on hover
+- **Deferred Loading** for improved performance
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🛠️ Setup Instructions
 
-## Building
+### Prerequisites
+- Node.js (v18+ recommended)
+- Angular CLI (`npm install -g @angular/cli`)
+- `json-server` (`npm install -g json-server`)
 
-To build the project run:
+### Installation
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-repo/angular-coding-test.git
+   cd angular-coding-test
